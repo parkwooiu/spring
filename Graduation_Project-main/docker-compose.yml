@@ -1,0 +1,23 @@
+version: "3.5"
+services:
+  backend:
+    build:
+      context: ./backend
+    environment:
+      - PORT=3001
+    ports:
+      - "3001:3001"
+  video:
+    build:
+      context: ./video
+    environment:
+      - PORT=3002
+    ports:
+      - "3002:3002"
+  chat:
+    build:
+      context: ./chat
+    environment:
+      - PORT=3003
+    ports:
+      - "3003:3003"
