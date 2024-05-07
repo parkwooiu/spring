@@ -16,7 +16,7 @@
     <update id="updateEvent" parameterType="org.zerock.domain.EventVO">
         UPDATE Events SET EventName = #{eventName}, Description = #{description},
         EventDate = #{eventDate}, Location = #{location}, Photo = #{photo}
-        WHERE EventID = #{eventId}
+        WHERE EventID = #{eventID}
     </update>
 
     <delete id="deleteEvent" parameterType="int">
