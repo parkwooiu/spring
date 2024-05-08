@@ -24,11 +24,13 @@
     <!-- 다른 빈들의 정의 -->
     
 <mybatis-spring:scan base-package="org.zerock.mapper"/>
+<context:component-scan base-package="org.zerock.service"/>
 
 <!-- MyBatis 설정 -->
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <!-- 다른 필요한 설정들 추가 -->
+    	
 </bean>
 </beans>
 

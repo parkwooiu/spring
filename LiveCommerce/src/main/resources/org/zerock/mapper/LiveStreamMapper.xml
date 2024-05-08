@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.LiveStreamMapper">
 
-    <!-- 모든 라이브 스트림 목록을 조회하는 쿼리 -->
-    <select id="getLiveStreams" resultType="org.zerock.domain.LiveStreamVO">
+    <resultMap id="LiveStreamResultMap" type="org.zerock.domain.LiveStreamVO">
+        <id property="streamID" column="StreamID"/>
+        <result property="title" column="Title"/>
+        <result property="url" column="URL"/>
+        <result property="description" column="Description"/>
+        <result property="startTime" column="StartTime"/>
+        <result property="endTime" column="EndTime"/>
+        <result property="photo" column="Photo"/>
+    </resultMap>
+
+    <select id="getLiveStreams" resultMap="LiveStreamResultMap">
         SELECT * FROM LiveStreams
     </select>
-    
-    <!-- 특정 라이브 스트림을 조회하는 쿼리 -->
-    <select id="getLiveStream" resultType="org.zerock.domain.LiveStreamVO" parameterType="int">
-        SELECT * FROM LiveStreams WHERE StreamID = #{streamId}
+
+    <select id="getLiveStream" parameterType="int" resultMap="LiveStreamResultMap">
+        SELECT * FROM LiveStreams WHERE StreamID = #{streamID}
     </select>
-    
-    <!-- 특정 라이브 스트림을 시작하는 쿼리 -->
-    <update id="startLiveStream" parameterType="int">
-        UPDATE LiveStreams SET StartTime = NOW() WHERE StreamID = #{streamId}
+
+    <insert id="insertLiveStream" parameterType="org.zerock.domain.LiveStreamVO">
+        INSERT INTO LiveStreams (Title, URL, Description, StartTime, EndTime, Photo)
+        VALUES (#{title}, #{url}, #{description}, #{startTime}, #{endTime}, #{photo})
+    </insert>
+
+    <update id="updateLiveStream" parameterType="org.zerock.domain.LiveStreamVO">
+        UPDATE LiveStreams
+        SET Title = #{title}, URL = #{url}, Description = #{description}, StartTime = #{startTime}, 
+            EndTime = #{endTime}, Photo = #{photo}
+        WHERE StreamID = #{streamID}
     </update>
-    
-    <!-- 특정 라이브 스트림을 종료하는 쿼리 -->
-    <update id="endLiveStream" parameterType="int">
-        UPDATE LiveStreams SET EndTime = NOW() WHERE StreamID = #{streamId}
-    </update>
-    
+
+    <delete id="deleteLiveStream" parameterType="int">
+        DELETE FROM LiveStreams WHERE StreamID = #{streamID}
+    </delete>
+
 </mapper>
