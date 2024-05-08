@@ -1,23 +1,23 @@
 package org.zerock.mapper;
 
-import org.apache.ibatis.annotations.Param;
-import org.zerock.domain.KakaoPaymentVO;
-
 import java.util.List;
+
+import org.zerock.domain.KakaoPaymentVO;
 
 public interface KakaoPaymentMapper {
 
     // Create
-    void insertKakaoPayment(KakaoPaymentVO kakaoPayment);
+    public void insertKakaoPayment(KakaoPaymentVO kakaoPayment);
 
     // Read
-    KakaoPaymentVO selectKakaoPayment(@Param("paymentID") int paymentID);
-    List<KakaoPaymentVO> selectAllKakaoPayments();
+    public KakaoPaymentVO selectKakaoPayment(int paymentID);
+    
+    public List<KakaoPaymentVO> selectAllKakaoPayments();
 
     // Update
-    void updateKakaoPayment(KakaoPaymentVO kakaoPayment);
+    public void updateKakaoPayment(KakaoPaymentVO kakaoPayment);
 
     // Delete
-    void deleteKakaoPayment(@Param("paymentID") int paymentID);
+    public void deleteKakaoPayment(int paymentID);
     
 }

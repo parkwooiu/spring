@@ -30,5 +30,10 @@
     <select id="getUserList" resultType="org.zerock.domain.UserVO">
         SELECT * FROM Users
     </select>
+    
+    <!-- UserMapper.xml -->
+	    <select id="selectUserByEmail" resultType="org.zerock.domain.UserVO">
+	        SELECT * FROM users WHERE email = #{email}
+	    </select>
 
 </mapper>
