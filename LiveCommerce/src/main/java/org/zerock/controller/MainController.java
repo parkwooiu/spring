@@ -1,87 +1,36 @@
 package org.zerock.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.zerock.domain.CartVO;
-import org.zerock.domain.LiveStreamVO;
-import org.zerock.service.EventService;
-import org.zerock.service.LiveStreamService;
-import org.zerock.service.ShoppingCartService;
-import org.zerock.service.UserService;
+import org.zerock.service.CategoryService;
+import org.zerock.service.ProductService;
 
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
+@RequestMapping("/live/*")
 @Log4j
-@RequiredArgsConstructor
-@RequestMapping("/*")
 public class MainController {
 
-	private final UserService userService;
-	
-	private final ShoppingCartService shoppingCartService;
-	
-	private final EventService eventService;
-	
-	private final LiveStreamService liveStreamService; 
-	
-	//로그인
-	@GetMapping("/login")
-    public String goToLoginPage() {
-        return "loginPage";
-    }
- 
- 	//로그인 받아주기
- 	@PostMapping("/login")
-    public String loginUser(@RequestParam String username, @RequestParam String password) {
+    private final CategoryService categoryService;
+    private final ProductService productService;
 
-	 	boolean isLoggedIn = userService.loginUser(username, password);
-        if (isLoggedIn) {
-            return "redirect:/board/main";
-        } else {
-            return "redirect:/board/login?error";
-        }
+    public MainController(CategoryService categoryService, ProductService productService) {
+        this.categoryService = categoryService;
+        this.productService = productService;
     }
 
- 	//장바구니 이동
- 	@GetMapping("/cart")
-    public String goToShoppingCartPage(Model model) {
-
-	 List<CartVO> cartItems = shoppingCartService.getCartItems();
-        model.addAttribute("cartItems", cartItems);
-        return "shoppingCartPage";
+    @GetMapping("/main")
+    public String main(Model model) {
+        // 카테고리 리스트와 프로덕트 리스트를 가져와서 모델에 추가
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("products", productService.getAllProducts());
+        
+        // 메인 페이지 뷰로 이동
+        return "/live/main";
     }
-
- 	//메인페이지 새로고침
- 	@GetMapping("/main")
- 	public String goToMainPage() {
- 	    return "mainPage";
- 	}
- 	
- 	//이벤트페이지
-    @GetMapping("/event")
-    public String goToEventPage() {
-        return "eventPage";
-    }
-
-    //라이브페이지
-    @GetMapping("/live")
-    public String goToLiveStreamPage(Model model) {
-        List<LiveStreamVO> liveStreams = liveStreamService.getLiveStreams();
-        model.addAttribute("liveStreams", liveStreams);
-        return "liveStreamPage";
-    }
-
-    @GetMapping("/category")
-    public String showCategoryList() {
-        return "categoryList";
-    }
-
 }

@@ -35,7 +35,7 @@ public class CategoryServiceTest {
     public void testGetCategory() {
 
         // 생성된 카테고리의 ID를 가져와서 조회
-        int categoryId = 1; // 예시로 CategoryID를 1로 지정
+        int categoryId = 9; // 예시로 CategoryID를 1로 지정
         CategoryVO createdCategory = categoryService.getCategory(categoryId);
         log.info(createdCategory);
     }
@@ -46,7 +46,7 @@ public class CategoryServiceTest {
     @Test
     public void testUpdateCategory() {
         // 생성된 카테고리의 ID를 가져와서 조회
-        int categoryId = 1; // 예시로 CategoryID를 1로 지정
+        int categoryId = 9; // 예시로 CategoryID를 1로 지정
         CategoryVO createdCategory = categoryService.getCategory(categoryId);
 
         // 카테고리 이름을 업데이트
@@ -63,7 +63,7 @@ public class CategoryServiceTest {
     @Test
     public void testDeleteCategory() {
         
-     categoryService.deleteCategory(7);
+     categoryService.deleteCategory(1);
  }
 
     @Test
