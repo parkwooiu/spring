@@ -55,7 +55,7 @@ public class ProductServiceImplTest {
 	
 	@Test
 	public void testUpdateProduct() {
-		ProductVO product = productService.getProduct(7); // Change to the existing product ID in your database
+		ProductVO product = productService.getProduct(11); // Change to the existing product ID in your database
 		
 		product.setPrice(15000); // Change the price
 		
