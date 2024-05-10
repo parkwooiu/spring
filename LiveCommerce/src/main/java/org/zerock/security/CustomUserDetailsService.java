@@ -9,11 +9,10 @@ import org.zerock.domain.UserVO;
 
 import org.zerock.mapper.UserMapper;
 
-import lombok.RequiredArgsConstructor;
+
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-//@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService{
 	
 	@Autowired
