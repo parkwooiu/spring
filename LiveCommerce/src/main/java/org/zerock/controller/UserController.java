@@ -14,7 +14,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/user")
-@Log4j
+
 public class UserController {
 
     @Autowired

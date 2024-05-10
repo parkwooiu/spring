@@ -13,7 +13,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @RequestMapping("/live/*")
-@Log4j
+
 public class MainController {
 
     private final CategoryService categoryService;

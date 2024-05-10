@@ -19,7 +19,7 @@ public class UserServiceImplTest {
     @Test // Register User
     public void testRegisterUser() {
         UserVO user = UserVO.builder()
-                .username("testUser")
+                .username("testUsers")
                 .password("testPassword")
                 .email("test@example.com")
                 .shippingAddress("경기도 성남시")
