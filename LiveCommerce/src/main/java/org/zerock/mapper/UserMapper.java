@@ -21,5 +21,7 @@ public interface UserMapper {
 
     List<UserVO> getUserList();
     
-    UserVO selectUserByUserName(@Param("username") String username); 
+    UserVO selectUserByUserName(@Param("username") String username);
+
+	void updateUserEnabledByUsername(@Param("username") String username, @Param("enabled") int enabled);
 }

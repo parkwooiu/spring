@@ -30,7 +30,6 @@ public class UserMapperTests {
     @Test  //C
     public void testRegisterUser() {
         UserVO user = UserVO.builder()
-        		.userID(2)
         		.username("test")
         		.email("aaa@naver.com")
         		.password("1234")

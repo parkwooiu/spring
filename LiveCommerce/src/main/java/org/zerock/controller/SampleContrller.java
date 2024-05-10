@@ -16,9 +16,9 @@ public class SampleContrller {
 		log.info("all..................");
 	}
 	
-	@GetMapping("/member")
+	@GetMapping("/user")
 	public void doMember() {
-		log.info("member..................");
+		log.info("user..................");
 	}
 
 	@GetMapping("/admin")

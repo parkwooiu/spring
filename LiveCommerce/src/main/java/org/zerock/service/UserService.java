@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.UserVO;
 
 public interface UserService {
@@ -19,4 +20,6 @@ public interface UserService {
     List<UserVO> getUserList();
     
     UserVO selectUserByUserName(String username);
+    
+    void updateUserEnabledByUsername(@Param("username") String username, @Param("enabled") int enabled);
 }

@@ -30,8 +30,8 @@ public class UserServiceImplTest {
     @Test // Register User
     public void testRegisterUser() {
         UserVO user = UserVO.builder()
-                .username("test")
-                .password(encoder.encode("1111"))
+                .username("testa")
+                .password(encoder.encode("11111"))
                 .email("test@example.com")
                 .shippingAddress("경기도 성남시")
                 .shippingPostalCode("18506")
@@ -56,9 +56,9 @@ public class UserServiceImplTest {
     @Test // Update User
     public void testUpdateUser() {
         UserVO user = UserVO.builder()
-                .userID(9)
-                .username("updatedUser")
-                .password("updatedPassword")
+                .userID(5)
+                .username("admin1")
+                .password(encoder.encode("1234"))
                 .email("updated@example.com")
                 .shippingAddress("경기도 성남시")
                 .shippingPostalCode("18506")
@@ -93,12 +93,18 @@ public class UserServiceImplTest {
             log.info("Login failed for user: " + username);
         }
     }
-
     @Test // Get User List
     public void testGetUserList() {
         log.info("List of users:");
 
         userService.getUserList().forEach(user -> log.info(user));
     }
+    @Test
+    public void testUpdateUserEnabledByUsername() {
+        String username = "testa";
+        int enabled = 1;
 
+        userService.updateUserEnabledByUsername(username, enabled);
+
+}
 }

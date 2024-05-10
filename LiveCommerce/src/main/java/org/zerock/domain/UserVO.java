@@ -23,6 +23,7 @@ public class UserVO implements UserDetails {
     private String password; // 사용자 비밀번호
     private String shippingAddress; // 배송 주소
     private String shippingPostalCode; // 배송 우편번호
+    private int enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

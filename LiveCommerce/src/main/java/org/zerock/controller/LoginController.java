@@ -31,6 +31,7 @@ public class LoginController {
 		if(error != null) {
 			model.addAttribute("error", "아이디 or 비번이 틀립니다.");
 		}
+
 		
 		if(logout != null) {
 			model.addAttribute("logout", "로그아웃!!!!");
