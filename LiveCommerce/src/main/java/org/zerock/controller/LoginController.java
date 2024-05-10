@@ -50,19 +50,7 @@ public class LoginController {
    public void logoutGET() {
       log.info("custom logout.........");
    }
-     
-     
-     @GetMapping("/user/register")
-     public String registerForm(Model model) {
-         model.addAttribute("user", new UserVO());
-         return "/user/registerForm"; // 회원가입 폼으로 이동
-     }
-
-     @PostMapping("/user/register")
-     public String registerSubmit(@ModelAttribute UserVO user) {
-         userService.registerUser(user);
-         return "redirect:/user/login"; // 회원가입 성공 시 로그인 페이지로 이동
-     }
+    
     
 }
 

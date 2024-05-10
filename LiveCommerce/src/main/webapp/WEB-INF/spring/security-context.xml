@@ -43,6 +43,8 @@
         <!-- 로그아웃 설정 -->
         <security:logout logout-success-url="/customLogout"/>
         
+
+        
    </security:http>
     
     
