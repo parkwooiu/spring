@@ -71,20 +71,21 @@
         <h1>라이브 커머스</h1>
         <nav>
             <ul>
-                <li><a href="/home">홈</a></li>
-                <li><a href="/products">상품 목록</a></li>
-                <li><a href="/about">회사 소개</a></li>
+<!--                 <li><a href="/home">홈</a></li> -->
+<!--                 <li><a href="/products">상품 목록</a></li> -->
+<!--                 <li><a href="/about">회사 소개</a></li> -->
                 <!-- 사용자 및 관리자에 따라 다른 메뉴 표시 -->
                 <%-- 로그인 여부에 따라 다른 메뉴 표시 --%>
                 <% if (request.isUserInRole("ROLE_USER")) { %>
-                    <li><a href="/profile">내 프로필</a></li>
+                    <li><a href="/live/profile">내 프로필</a></li>
                     <li><a href="/cart">장바구니</a></li>
                     <li><a href="/logout">로그아웃</a></li>
+                    
                 <% } else if (request.isUserInRole("ROLE_ADMIN")) { %>
                     <li><a href="/admin/dashboard">관리자 대시보드</a></li>
                     <li><a href="/logout">로그아웃</a></li>
                 <% } else { %>
-                    <li><a href="/login">로그인</a></li>
+                    <li><a href="/customLogin">로그인</a></li>
                     <li><a href="/register">회원가입</a></li>
                 <% } %>
             </ul>

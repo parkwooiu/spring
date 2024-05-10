@@ -34,7 +34,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 			response.sendRedirect("/sample/admin");
 			return ;
 		}else if(roleNames.contains("ROLE_USER")){
-			response.sendRedirect("/sample/user");
+			response.sendRedirect("/live/main");
 			return ;
 		}
 		
