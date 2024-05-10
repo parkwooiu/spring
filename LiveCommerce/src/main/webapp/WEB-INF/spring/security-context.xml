@@ -2,8 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
    <!-- 사용자 정의 로그인 성공 핸들러 등록 -->
     <bean id="customLoginSuccessHandler" class="org.zerock.security.CustomLoginSuccessHandler">
@@ -34,12 +38,13 @@
                     authentication-failure-url="/customLogin?error=true"/>
 
         <!-- 접근 거부 핸들러 설정 -->
-        <security:access-denied-handler error-page="/accessDenied"/>
-
+        <security:access-denied-handler error-page="/accessError"/>
+        
         <!-- 로그아웃 설정 -->
         <security:logout logout-success-url="/customLogout"/>
         
    </security:http>
+    
     
    
 

@@ -13,7 +13,7 @@
 	
 	<form action="/login" method="post">
 		<div>
-			<input type="text" name="username" value="test">
+			<input type="text" name="username" value="testq">
 		</div>
 		<div>
 			<input type="password" name="password" value="1111">
