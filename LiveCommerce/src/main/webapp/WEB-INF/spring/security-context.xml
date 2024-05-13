@@ -37,15 +37,13 @@
         <security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccessHandler"
                     authentication-failure-url="/customLogin?error=true"/>
                     
-             <!-- 로그아웃 페이지 설정 -->
-          <security:logout logout-url="/customLogout" invalidate-session="true" 
-			delete-cookies="remember-me, JSESSION_ID"/>
+
+		    <!-- 다른 설정들 -->
+		    <security:logout logout-url="/customLogout" logout-success-url="/live/main" />
+
 
         <!-- 접근 거부 핸들러 설정 -->
         <security:access-denied-handler error-page="/accessError"/>
-        
-        <!-- 로그아웃 설정 -->
-        <security:logout logout-success-url="/customLogout"/>
         
 
         
