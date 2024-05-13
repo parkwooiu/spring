@@ -98,12 +98,52 @@
     </header>
     
     <main>
+    
+
+    
+        <body>
+    <!-- YouTube 임베드 플레이어를 포함할 div 요소 -->
+    <div id="player"></div>
+
+    <script>
+        // YouTube 비디오 ID 설정
+        var videoId = "C4DuYovuPhM";
+
+        // YouTube 임베드 API를 비동기적으로 로드
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // YouTube 플레이어 생성 함수
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '360',
+                width: '640',
+                videoId: videoId,
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        // 플레이어가 준비되었을 때 실행되는 함수
+        function onPlayerReady(event) {
+            event.target.playVideo(); // 플레이어 자동 재생
+        }
+    </script>
+</body>
+    
+    
         <section class="hero">
             <h2>Welcome to Live Commerce!</h2>
             <p>Discover amazing products and shop with ease.</p>
             <a href="/products" class="btn">Shop Now</a>
         </section>
     </main>
+    
+
     
     <footer>
         <p>&copy; 2024 Live Commerce. All rights reserved.</p>
