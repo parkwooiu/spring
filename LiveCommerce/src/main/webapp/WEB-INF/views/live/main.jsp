@@ -71,24 +71,19 @@
         <h1>라이브 커머스</h1>
         <nav>
             <ul>
-<!--                 <li><a href="/home">홈</a></li> -->
-<!--                 <li><a href="/products">상품 목록</a></li> -->
-<!--                 <li><a href="/about">회사 소개</a></li> -->
-                <!-- 사용자 및 관리자에 따라 다른 메뉴 표시 -->
-                <%-- 로그인 여부에 따라 다른 메뉴 표시 --%>
+                <%-- 사용자 로그인 상태에 따라 다른 메뉴 표시 --%>
                 <% if (request.isUserInRole("ROLE_USER")) { %>
                     <li><a href="/live/profile">내 프로필</a></li>
                     <li><a href="/cart">장바구니</a></li>
                     <form action="/customLogout" method="post">
-					    <button type="submit">로그아웃</button>
-					    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					</form>
-                    
+                        <button type="submit">로그아웃</button>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    </form>
                 <% } else if (request.isUserInRole("ROLE_ADMIN")) { %>
                     <li><a href="/admin/dashboard">관리자 대시보드</a></li>
                     <form action="/user/logout" method="post">
                         <button type="submit">로그아웃</button>
-                          </form>
+                    </form>
                 <% } else { %>
                     <li><a href="/customLogin">로그인</a></li>
                     <li><a href="/user/register">회원가입</a></li>
@@ -98,52 +93,51 @@
     </header>
     
     <main>
-    
+        <!-- YouTube 임베드 플레이어를 포함할 div 요소 -->
+        <div id="player"></div>
 
-    
-        <body>
-    <!-- YouTube 임베드 플레이어를 포함할 div 요소 -->
-    <div id="player"></div>
+        <!-- YouTube API 로드 스크립트 -->
+        <script>
+            // YouTube 비디오 ID 설정
+            var videoId = "C4DuYovuPhM";
 
-    <script>
-        // YouTube 비디오 ID 설정
-        var videoId = "C4DuYovuPhM";
+            // YouTube 임베드 API를 비동기적으로 로드
+            var tag = document.createElement('script');
+            tag.src = 'https://www.youtube.com/iframe_api';
+            var firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        // YouTube 임베드 API를 비동기적으로 로드
-        var tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        var firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            // YouTube 플레이어 생성 함수
+            var player;
+            function onYouTubeIframeAPIReady() {
+                player = new YT.Player('player', {
+                    height: '360',
+                    width: '640',
+                    videoId: videoId,
+                    events: {
+                        'onReady': onPlayerReady
+                    }
+                });
+            }
 
-        // YouTube 플레이어 생성 함수
-        var player;
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('player', {
-                height: '360',
-                width: '640',
-                videoId: videoId,
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
+         // 플레이어가 준비되었을 때 실행되는 함수
+            function onPlayerReady(event) {
+                event.target.playVideo(); // 플레이어 자동 재생
 
-        // 플레이어가 준비되었을 때 실행되는 함수
-        function onPlayerReady(event) {
-            event.target.playVideo(); // 플레이어 자동 재생
-        }
-    </script>
-</body>
-    
-    
+                // 라이브 영상 클릭 이벤트 핸들링
+                var liveVideo = document.getElementById('player'); // YouTube 비디오 플레이어 요소 가져오기
+                liveVideo.addEventListener('click', function() {
+                    window.location.href = '/live/main'; // 원하는 리다이렉션 URL로 이동
+                });
+            }
+        </script>
+
         <section class="hero">
             <h2>Welcome to Live Commerce!</h2>
             <p>Discover amazing products and shop with ease.</p>
             <a href="/products" class="btn">Shop Now</a>
         </section>
     </main>
-    
-
     
     <footer>
         <p>&copy; 2024 Live Commerce. All rights reserved.</p>
