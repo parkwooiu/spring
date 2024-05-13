@@ -12,7 +12,7 @@ public class YouTubeDataAPIClient {
     public static void main(String[] args) throws Exception {
         // API 키 및 비디오 ID 설정
         String apiKey = "AIzaSyC-iKxB-I4d5RynCsP6gHR9SOtnp0sIZO4";
-        String videoId = "C4DuYovuPhM";
+        String videoId = "HldGlrxuoFs";
 
         // API 요청 URL 생성
         String apiUrl = "https://www.googleapis.com/youtube/v3/videos?id=" + videoId + "&key=" + apiKey + "&part=snippet";

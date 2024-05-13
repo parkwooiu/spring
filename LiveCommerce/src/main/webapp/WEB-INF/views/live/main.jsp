@@ -85,7 +85,7 @@
                         <button type="submit">로그아웃</button>
                     </form>
                 <% } else { %>
-                    <li><a href="/customLogin">로그인</a></li>
+ 	                   <li><a href="/customLogin">로그인</a></li>
                     <li><a href="/user/register">회원가입</a></li>
                 <% } %>
             </ul>
@@ -96,41 +96,36 @@
         <!-- YouTube 임베드 플레이어를 포함할 div 요소 -->
         <div id="player"></div>
 
-        <!-- YouTube API 로드 스크립트 -->
-        <script>
-            // YouTube 비디오 ID 설정
-            var videoId = "C4DuYovuPhM";
+       <!-- YouTube 임베드 플레이어를 포함할 div 요소 -->
+<div id="player"></div>
 
-            // YouTube 임베드 API를 비동기적으로 로드
-            var tag = document.createElement('script');
-            tag.src = 'https://www.youtube.com/iframe_api';
-            var firstScriptTag = document.getElementsByTagName('script')[0];
-            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+<!-- YouTube API 로드 스크립트 -->
+<script>
+    // YouTube 비디오 ID 설정
+    var videoId = "HldGlrxuoFs";
 
-            // YouTube 플레이어 생성 함수
-            var player;
-            function onYouTubeIframeAPIReady() {
-                player = new YT.Player('player', {
-                    height: '360',
-                    width: '640',
-                    videoId: videoId,
-                    events: {
-                        'onReady': onPlayerReady
-                    }
-                });
+    // YouTube 임베드 API를 비동기적으로 로드
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // YouTube 플레이어 생성 함수
+    var player;
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+            height: '360',
+            width: '640',
+            videoId: videoId,
+            events: {
+                'onReady': onPlayerReady
             }
+        });
+    }
 
-         // 플레이어가 준비되었을 때 실행되는 함수
-            function onPlayerReady(event) {
-                event.target.playVideo(); // 플레이어 자동 재생
 
-                // 라이브 영상 클릭 이벤트 핸들링
-                var liveVideo = document.getElementById('player'); // YouTube 비디오 플레이어 요소 가져오기
-                liveVideo.addEventListener('click', function() {
-                    window.location.href = '/live/main'; // 원하는 리다이렉션 URL로 이동
-                });
-            }
-        </script>
+</script>
+
 
         <section class="hero">
             <h2>Welcome to Live Commerce!</h2>
