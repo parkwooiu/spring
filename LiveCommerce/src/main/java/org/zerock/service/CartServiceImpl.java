@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.zerock.domain.CartProductVO;
 import org.zerock.domain.CartVO;
 import org.zerock.mapper.CartMapper;
 
@@ -47,10 +48,9 @@ public class CartServiceImpl implements CartService {
         return cartMapper.getCartByUserID(userID);
     }
     @Override
-    public List<CartVO> getCartDetails(int userID) {
-//        return cartMapper.selectCartDetails(userID);
-        return null;
+    public List<CartProductVO> getCartDetails(int userID) {
+        return cartMapper.selectCartDetails(userID);
+    }
     }
 
 
-}

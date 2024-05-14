@@ -1,7 +1,5 @@
 package org.zerock.service;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -9,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.domain.CartProductVO;
 import org.zerock.domain.CartVO;
 
 import lombok.extern.log4j.Log4j;
@@ -76,15 +75,12 @@ public class CartServiceTest {
 }
     
     @Test
-    public void testSelectCartDetails() {
+    public void testGetCartDetails() {
         int userID = 8; // 임의의 userID 설정
-        List<CartVO> cartDetails = cartService.getCartDetails(userID);
-        // 테스트 결과 출력
-         log.info("장바구니 상세 정보:" + cartDetails);
-        for (CartVO cart : cartDetails) {
+        List<CartProductVO> cartDetails = cartService.getCartDetails(userID);
+        for (CartProductVO cart : cartDetails) {
            log.info(cart);
-}
-        
-}
+        }
+    }
     
 }
