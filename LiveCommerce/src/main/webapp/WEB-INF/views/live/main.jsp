@@ -1,7 +1,11 @@
-<%@page import="org.zerock.service.LiveStreamServiceImpl"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="org.zerock.service.ProductService"%>
+<%@page import="org.zerock.domain.ProductVO"%>
+<%@page import="java.util.List"%>
 <%@page import="org.zerock.service.LiveStreamService"%>
 <%@page import="org.zerock.domain.LiveStreamVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,7 +97,7 @@
             <!-- 사용자 및 관리자에 따라 다른 메뉴 표시 -->
             <% if (request.isUserInRole("ROLE_USER")) { %>
                 <li><a href="/live/profile">내 프로필</a></li>
-                <li><a href="/cart/list">장바구니</a></li>
+                <li><a href="/cart">장바구니</a></li>
                 <form action="/customLogout" method="post">
                     <button type="submit">로그아웃</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -115,18 +119,30 @@
 
 
 <main>
-
-        <h2>Welcome to Live Commerce!</h2>
-
-        
-        <div class="video-container">
-            <!-- 동영상 출력 -->
-            <div>
-            </div>
-        </div>
-        
-
+   <h1>Products</h1>
+       <table border="1">
+           <tr>
+               <th>Product ID</th>
+               <th>Product Name</th>
+               <th>Description</th>
+               <th>Price</th>
+               <th>Photo</th>
+           </tr>
+           <c:forEach items="${products}" var="product">
+               <tr>
+                   <td>${product.productID}</td>
+                   <td>${product.productName}</td>
+                   <td>${product.description}</td>
+                   <td>${product.price}</td>
+                   <td><img src="${product.photo}" alt="${product.productName}" width="100"></td>
+               </tr>
+           </c:forEach>
+      </table>
+      
+      
+      
 </main>
+
 
 
 

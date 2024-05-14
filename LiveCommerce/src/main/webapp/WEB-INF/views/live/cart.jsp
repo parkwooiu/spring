@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Cart List</h2>
-    <table border="1">
+    <table border="1">	
         <thead>
             <tr>
                 <th>Cart ID</th>
@@ -26,6 +26,9 @@
                     <td>${cart.productID}</td>
                     <td>${cart.quantity}</td>
                     <td><a href="/carts/${cart.cartID}">View Details</a></td>
+                </tr>
+                <tr>
+                  <td>${product}</td>
                 </tr>
             </c:forEach>
         </tbody>

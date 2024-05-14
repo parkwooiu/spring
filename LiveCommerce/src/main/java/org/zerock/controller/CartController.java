@@ -9,24 +9,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.CartVO;
 import org.zerock.service.CartService;
+import org.zerock.service.ProductService;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
     private final CartService cartService;
+    private final ProductService productService;
 
     @Autowired
-    public CartController(CartService cartService) {
+    public CartController(CartService cartService, ProductService productService) {
         this.cartService = cartService;
+		this.productService = productService;
     }
 
     // 모든 카트 목록을 조회하는 페이지
     @GetMapping("/list")
     public String getAllCarts(Model model) {
         model.addAttribute("carts", cartService.getAllCarts());
+        model.addAttribute("product", productService.getAllProducts());
         return "/live/cart"; // 카트 목록을 보여주는 뷰로 이동
     }
+    
 
     // 특정 카트의 상세 정보 조회 페이지
     @GetMapping("/{cartID}")
