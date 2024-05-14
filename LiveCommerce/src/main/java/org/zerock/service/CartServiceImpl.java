@@ -46,6 +46,11 @@ public class CartServiceImpl implements CartService {
     public List<CartVO> getCartByUserID(int userID) {
         return cartMapper.getCartByUserID(userID);
     }
+    @Override
+    public List<CartVO> getCartDetails(int userID) {
+//        return cartMapper.selectCartDetails(userID);
+        return null;
+    }
 
 
 }

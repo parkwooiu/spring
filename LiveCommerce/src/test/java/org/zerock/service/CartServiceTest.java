@@ -74,4 +74,17 @@ public class CartServiceTest {
 
         log.info(result);
 }
+    
+    @Test
+    public void testSelectCartDetails() {
+        int userID = 8; // 임의의 userID 설정
+        List<CartVO> cartDetails = cartService.getCartDetails(userID);
+        // 테스트 결과 출력
+         log.info("장바구니 상세 정보:" + cartDetails);
+        for (CartVO cart : cartDetails) {
+           log.info(cart);
+}
+        
+}
+    
 }

@@ -60,4 +60,10 @@ public class CartController {
 
         return "/live/cart";
     }
+    @GetMapping("/details")
+    public String getCartDetails(Model model, int userID) {
+        List<CartVO> cartDetails = cartService.getCartDetails(userID);
+        model.addAttribute("cartDetails", cartDetails);
+        return "cartDetails"; // 장바구니 상세 정보를 표시하는 뷰의 이름
+    }
 }
