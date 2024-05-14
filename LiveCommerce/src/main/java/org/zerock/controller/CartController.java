@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.CartVO;
+import org.zerock.domain.ProductVO;
 import org.zerock.service.CartService;
+import org.zerock.service.OrderService;
 import org.zerock.service.ProductService;
 
 @Controller
@@ -17,26 +21,38 @@ public class CartController {
 
     private final CartService cartService;
     private final ProductService productService;
+    private final OrderService orderService;
 
     @Autowired
-    public CartController(CartService cartService, ProductService productService) {
+    public CartController(CartService cartService, ProductService productService, OrderService orderService) {
         this.cartService = cartService;
-		this.productService = productService;
+        this.productService = productService;
+        this.orderService = orderService;
     }
 
     // 모든 카트 목록을 조회하는 페이지
     @GetMapping("/list")
     public String getAllCarts(Model model) {
-        model.addAttribute("carts", cartService.getAllCarts());
-        model.addAttribute("product", productService.getAllProducts());
+        List<CartVO> carts = cartService.getAllCarts();
+        model.addAttribute("carts", carts);
+        
+        // 상품 정보를 가져와서 모델에 추가
+        List<ProductVO> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        
         return "/live/cart"; // 카트 목록을 보여주는 뷰로 이동
     }
-    
 
     // 특정 카트의 상세 정보 조회 페이지
     @GetMapping("/{cartID}")
     public String getCart(@PathVariable("cartID") int cartID, Model model) {
-        model.addAttribute("cart", cartService.getCart(cartID));
+        CartVO cart = cartService.getCart(cartID);
+        model.addAttribute("cart", cart);
+        
+        // 해당 카트에 속한 상품 정보를 가져와서 모델에 추가
+        ProductVO product = productService.getProduct(cart.getProductID());
+        model.addAttribute("product", product);
+        
         return "cartDetail"; // 카트 상세 정보를 보여주는 뷰로 이동
     }
 
