@@ -64,4 +64,5 @@ public class CartMapperTest {
         mapper.deleteCart(cartID);
         log.info("장바구니 정보 삭제: CartID=" + cartID);
     }
+
 }

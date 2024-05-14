@@ -23,6 +23,10 @@
         INSERT INTO Cart (UserID, ProductID, Quantity)
         VALUES (#{userID}, #{productID}, #{quantity})
     </insert>
+    
+    <select id="getCartByUserID" resultType="org.zerock.domain.CartVO">
+        SELECT * FROM Cart WHERE UserID = #{userID}
+    </select>
 
     <update id="updateCart" parameterType="org.zerock.domain.CartVO">
         UPDATE Cart

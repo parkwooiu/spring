@@ -14,4 +14,7 @@ public interface CartMapper {
     void updateCart(CartVO cart);
 
     void deleteCart(int cartID);
+
+    // 사용자의 장바구니 정보 가져오기
+    List<CartVO> getCartByUserID(int userID);
 }

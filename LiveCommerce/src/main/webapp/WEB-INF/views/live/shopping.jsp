@@ -20,6 +20,14 @@
         <p>제품 설명: ${product.description}</p>
         <p>가격: ${product.price}</p>
         <img src="${product.photo}" alt="${product.productName}" width="300">
+        <form action="/live/order" method="get">
+            <input type="hidden" name="id" value="${product.productID}">
+            <button type="submit">구매하기</button>
+        </form>
+        <form action="/live/cart" method="get">
+            <input type="hidden" name="id" value="${product.productID}">
+            <button type="submit">장바구니</button>
+        </form>
     </div>
 </main>
 

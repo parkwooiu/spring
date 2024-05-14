@@ -1,8 +1,8 @@
 package org.zerock.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.CartVO;
-import java.util.List;
 
 import lombok.extern.log4j.Log4j;
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,9 +37,9 @@ public class CartServiceTest {
     @Test
     public void testInsertCart() {
         CartVO cart = CartVO.builder()
-                .userID(3) // 사용자 ID 입력
-                .productID(1) // 제품 ID 입력
-                .quantity(2) // 수량 입력
+                .userID(8) // 사용자 ID 입력
+                .productID(3) // 제품 ID 입력
+                .quantity(4) // 수량 입력
                 .build();
 
         cartService.insertCart(cart);
@@ -65,4 +64,14 @@ public class CartServiceTest {
         cartService.deleteCart(cartID);
         
     }
+    @Test
+    public void testGetCartByUserID() {
+        // Given
+        int userId = 3;
+
+        // When
+        List<CartVO> result = cartService.getCartByUserID(userId);
+
+        log.info(result);
+}
 }
