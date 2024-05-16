@@ -130,7 +130,7 @@
    <h1>Products</h1>
        <table border="1">
            <tr>
-               <th>Product ID</th>
+               <th>Product Id</th>
                <th>Product Name</th>
                <th>Description</th>
                <th>Price</th>
@@ -138,12 +138,12 @@
            </tr>
            <c:forEach items="${products}" var="product">
                <tr>
-                   <td>${product.productID}</td>
+                   <td>${product.productId}</td>
                    <td>${product.productName}</td>
                    <td>${product.description}</td>
                    <td>${product.price}</td>
                    <td><img src="${product.photo}" alt="${product.productName}" width="100"></td>
-                   <td><a href="/live/product?id=${product.productID}">View Details</a></td>
+                   <td><a href="/live/product?id=${product.productId}">View Details</a></td>
                </tr>
            </c:forEach>
       </table>
