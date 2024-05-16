@@ -91,8 +91,16 @@
 </head>
 <body>
 <header>
-    <h1>라이브 커머스</h1>
-    <nav>
+<h1>라이브 커머스</h1>
+<nav class="main-nav">
+    <ul>
+        <%-- 카테고리 목록 표시 --%>
+        <c:forEach items="${categories}" var="category">
+            <li><a href="/live/category?categoryId=${category.categoryID}">${category.categoryName}</a></li>
+        </c:forEach>
+    </ul>
+</nav>
+     <nav class="user-nav">
         <ul>
             <!-- 사용자 및 관리자에 따라 다른 메뉴 표시 -->
             <% if (request.isUserInRole("ROLE_USER")) { %>
