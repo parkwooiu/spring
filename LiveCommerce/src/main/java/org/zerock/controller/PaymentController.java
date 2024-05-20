@@ -1,6 +1,10 @@
 package org.zerock.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +16,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+import org.zerock.domain.CartProductVO;
+import org.zerock.domain.ProductVO;
 import org.zerock.domain.UserVO;
 import org.zerock.service.UserService;
 
@@ -43,8 +50,44 @@ public class PaymentController {
 
         return "/kakaoPay";
     }
-    
-    
+    @PostMapping("/checkout")
+    public String checkout(@RequestParam("selectedProducts") String selectedProducts, @RequestParam("selectedAmount") int selectedAmount, Model model) {
+        log.info("Selected Products: " + selectedProducts);
+        log.info("selectedAmount: " + selectedAmount);
+        
+     // 현재 로그인한 사용자의 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        
+        // 사용자 이름으로 사용자 정보 가져오기
+        UserVO user = userService.selectUserByUserName(username);
+
+        
+        // 사용자의 이메일과 이름 주소 지역번호 가져오기
+        String buyer_Email = user.getEmail();
+        String buyer_Name = user.getUsername();
+        String buyer_ShippingAddress = user.getShippingAddress();
+        String buyer_ShippingPostalCode = user.getShippingPostalCode();
+
+        log.info("구매자 이름: " + buyer_Name);
+        log.info("구매자 이메일: " + buyer_Email);
+        log.info("productName: " + selectedProducts);
+        log.info("amount: " + selectedAmount);
+        log.info("지역번호  " + buyer_ShippingPostalCode);
+        log.info("구매자 주소 " + buyer_ShippingAddress);
+         
+         // productName과 amount 값을 모델에 추가하여 kakaoPay.jsp로 전달
+         model.addAttribute("productName", selectedProducts);
+         model.addAttribute("amount", selectedAmount);
+         model.addAttribute("ShippingPostalCode" , buyer_ShippingPostalCode);
+         model.addAttribute("ShippingAddress" , buyer_ShippingAddress);
+         model.addAttribute("Name",buyer_Name);
+         model.addAttribute("Email",buyer_Email);
+        
+        return "/kakaoPay";
+    }
+        
+   
     @PostMapping("/kakaoPay")
     public String processKakaoPay(HttpServletRequest request, Model model) {
        
