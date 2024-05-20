@@ -22,6 +22,10 @@
         INSERT INTO LiveChat (UserID, Message, ChatTime)
         VALUES (#{userID}, #{message}, #{chatTime})
     </insert>
+    
+      <insert id="saveMessage" parameterType="org.zerock.domain.LiveChatVO">
+        INSERT INTO LiveChat (UserID, Message) VALUES (#{userID}, #{message})
+    </insert>
 
     <update id="updateLiveChat" parameterType="org.zerock.domain.LiveChatVO">
         UPDATE LiveChat

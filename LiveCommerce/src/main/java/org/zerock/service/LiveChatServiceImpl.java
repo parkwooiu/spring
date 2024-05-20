@@ -41,4 +41,9 @@ public class LiveChatServiceImpl implements LiveChatService {
     public void removeLiveChat(int chatID) {
         liveChatMapper.deleteLiveChat(chatID);
     }
+    @Override
+    public LiveChatVO saveMessage(LiveChatVO chatVO) {
+        liveChatMapper.saveMessage(chatVO);
+		return chatVO;
+    }
 }

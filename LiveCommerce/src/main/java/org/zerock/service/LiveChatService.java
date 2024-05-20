@@ -20,4 +20,7 @@ public interface LiveChatService {
 
     // 라이브 채팅 정보 삭제
     void removeLiveChat(int chatID);
+    
+    LiveChatVO saveMessage(LiveChatVO chatVO);
+    
 }

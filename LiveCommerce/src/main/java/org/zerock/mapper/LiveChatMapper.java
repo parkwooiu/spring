@@ -19,4 +19,6 @@ public interface LiveChatMapper {
 
     // 라이브 채팅 정보 삭제
     void deleteLiveChat(int chatID);
+    
+    void saveMessage(LiveChatVO chatVO);
 }

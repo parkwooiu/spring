@@ -51,9 +51,14 @@ public class PaymentController {
         return "/kakaoPay";
     }
     @PostMapping("/checkout")
-    public String checkout(@RequestParam("selectedProducts") String selectedProducts, @RequestParam("selectedAmount") int selectedAmount, Model model) {
+    public String checkout(@RequestParam("selectedProducts") String selectedProducts, 
+                           @RequestParam("selectedAmount") String selectedAmount, 
+                           Model model) {
         log.info("Selected Products: " + selectedProducts);
         log.info("selectedAmount: " + selectedAmount);
+
+        // 선택된 상품의 총 가격을 부동 소수점 숫자로 파싱
+        double totalPrice = Double.parseDouble(selectedAmount);
         
      // 현재 로그인한 사용자의 정보 가져오기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
