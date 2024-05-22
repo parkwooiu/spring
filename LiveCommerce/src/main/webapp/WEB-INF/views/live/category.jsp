@@ -2,11 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>카테고리 페이지</title>
-</head>
+
+<%@ include file="../includes/header.jsp" %>
+
+
 <body>
+    <title>카테고리 페이지</title>
     <h1>카테고리 별 상품 목록</h1>
     
     <%-- 여기서 products는 컨트롤러에서 모델에 추가된 이름입니다. --%>
@@ -36,3 +37,5 @@
     </table>
 </body>
 </html>
+
+<%@ include file="../includes/footer.jsp" %>

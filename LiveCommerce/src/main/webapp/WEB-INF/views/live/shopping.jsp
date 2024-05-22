@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<%@ include file="../includes/header.jsp" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,26 +11,95 @@
     <!-- 여기에 필요한 CSS 및 JavaScript 파일을 추가하세요 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <style>
-        /* 간단한 채팅창 스타일링 */
-        #chatContainer {
-            border: 1px solid #ccc;
+<style>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background-color: #333;
+            color: #fff;
             padding: 10px;
-            width: 300px;
-            height: 400px;
-            overflow-y: scroll;
+            text-align: center;
         }
+
+        /* 메인 콘텐츠 스타일 */
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* 제품 상세 정보 영역 스타일 */
+        .product-details {
+            width: 60%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제품 이미지 스타일 */
+        .product-details img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        /* 주문 폼 스타일 */
+        .order-form {
+            margin-top: 20px;
+        }
+
+        /* 채팅 영역 스타일 */
+        #chatContainer {
+            width: 35%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 메시지 영역 스타일 */
         #messageArea {
-            height: 80%;
+            height: 250px;
             overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
+
+        /* 입력 필드 및 버튼 스타일 */
         #messageInput {
-            width: 80%;
+            width: calc(100% - 70px);
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
+
         #sendBtn {
-            width: 18%;
+            width: 60px;
+            padding: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #sendBtn:hover {
+            background-color: #0056b3;
         }
     </style>
+
 	<script>
 	    var sock;
 	    var stompClient;
@@ -164,8 +236,7 @@
     </div>
 </main>
 
-<footer>
-    <!-- 웹사이트 푸터 정보를 여기에 추가하세요 -->
-</footer>
 </body>
 </html>
+
+<%@ include file="../includes/footer.jsp" %>
