@@ -13,6 +13,8 @@
     LIMIT #{cri.amount} OFFSET #{cri.startRow}
 </select>
 
+
+
     <!-- 제품 등록 -->
     <insert id="insertProduct" parameterType="org.zerock.domain.ProductVO">
         INSERT INTO Products (ProductName, Description, Price, Photo)

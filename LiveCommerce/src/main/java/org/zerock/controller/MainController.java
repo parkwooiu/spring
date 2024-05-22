@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageDTO;
 import org.zerock.domain.UserVO;
@@ -23,7 +24,9 @@ public class MainController {
     private final UserService userService;
 
     @GetMapping("/main")
-    public String main(Model model, Authentication authentication, Criteria cri) {
+    public String main(Model model, Authentication authentication,
+                       @RequestParam(defaultValue = "1") int pageNum,
+                       @RequestParam(defaultValue = "10") int amount) {
         // 카테고리 리스트와 프로덕트 리스트를 가져와서 모델에 추가
         model.addAttribute("categories", categoryService.getAllCategories());
         
@@ -31,8 +34,7 @@ public class MainController {
         int total = productService.getTotalProductCount();
         
         // 페이징 처리를 위한 Criteria 설정
-        cri.setAmount(10); // 페이지당 항목 수를 10개로 설정
-        cri.setPageNum(1); // 첫 페이지를 기본값으로 설정
+        Criteria cri = new Criteria(pageNum, amount);
         
         // 페이징을 위한 시작 레코드와 종료 레코드 계산
         int startRow = (cri.getPageNum() - 1) * cri.getAmount() + 1;
@@ -60,6 +62,7 @@ public class MainController {
         // 메인 페이지 뷰로 이동
         return "/live/main";
     }
+
     
     @GetMapping("/profile")
     public String profile(Model model, Authentication authentication) {
