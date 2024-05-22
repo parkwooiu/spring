@@ -191,37 +191,20 @@
         <p>사용자 이름: ${currentUsername}</p>
         <p>제품번호 : ${product.productId}</p>
 
-        <!-- 주문 수량 입력 폼 -->
-        <label for="quantity">수량:</label>
-        <input type="number" id="quantity" name="quantity" min="1" value="1" onchange="updatePrice()">
-
         <!-- 총 가격 표시 -->
         <p>총 가격: <span id="totalPrice">${product.price}원</span></p>
 
-		<!-- 주문 양식 -->
-		<form action="/live/order" method="post">
+		<form method="post">
 		    <!-- 상품 정보를 hidden input으로 전달 -->
 		    <input type="hidden" name="productId" value="${product.productId}">
 		    <input type="hidden" name="userId" value="${currentUser}">
 		    <!-- 수량 필드 -->
 		    <label for="quantity">수량:</label>
 		    <input type="number" id="quantity" name="quantity" min="1" value="1">
-		
-		    <!-- 결제 버튼 -->
-		    <input type="submit" value="주문하기">
-		</form>
-		
-		<!-- 장바구니 추가 폼 -->
-		<form action="/cart/add" method="post">
-		    <!-- 상품 정보를 hidden input으로 전달 -->
-		    <input type="hidden" name="productId" value="${product.productId}">
-		    <input type="hidden" name="userId" value="${currentUser}">
-		    <!-- 수량 필드 -->
-		    <label for="cartQuantity">수량:</label>
-		    <input type="number" id="cartQuantity" name="quantity" min="1" value="1">
-		
 		    <!-- 장바구니에 추가 버튼 -->
-		    <input type="submit" value="장바구니 추가">
+		    <input type="submit" formaction="/cart/add" value="장바구니 추가">
+		    <!-- 주문하기 버튼 -->
+		    <input type="submit" formaction="/live/order" value="주문하기">
 		</form>
 
     </div>
