@@ -3,8 +3,8 @@ package org.zerock.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.zerock.domain.Criteria;
 import org.zerock.domain.ProductVO;
+
 import org.zerock.mapper.ProductMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -52,15 +52,6 @@ public class ProductServiceImpl implements ProductService{
     
     public List<ProductVO> searchProductsByName(String productName) {
         return productMapper.searchProductsByName(productName);
-    }
-    
-    @Override
-    public int getTotalProductCount() {
-        return productMapper.getTotalProductCount();
-    }
-    @Override
-    public List<ProductVO> getProductsWithPaging(Criteria cri) {
-        return productMapper.getProductsWithPaging(cri);
     }
 
 }

@@ -4,34 +4,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>카테고리별 상품 목록</title>
-    <!-- 필요한 스타일 시트 및 자바스크립트 파일 링크 등을 여기에 추가 -->
+    <title>카테고리 페이지</title>
 </head>
 <body>
-<header>
-    <!-- 상단 내비게이션 바 또는 로고 등을 여기에 추가 -->
-</header>
-
-<main>
-    <h1>카테고리별 상품 목록</h1>
-    <div class="product-list">
-        <!-- 상품 목록을 표시하기 위한 반복문 -->
-        <c:forEach items="${products}" var="product">
-            <div class="product">
-                <h2>${product.productName}</h2>
-                <p>${product.description}</p>
-                <p>${product.price}원</p>
-                <!-- 상품의 사진을 표시 -->
-                <img src="${product.photo}" alt="${product.productName}" width="200">
-                <!-- 각 상품의 상세 페이지로 이동할 수 있는 링크 -->
-                <a href="/live/product?id=${product.productID}">상세 정보 보기</a>
-            </div>
-        </c:forEach>
-    </div>
-</main>
-
-<footer>
-    <!-- 하단 푸터 부분을 여기에 추가 -->
-</footer>
+    <h1>카테고리 별 상품 목록</h1>
+    
+    <%-- 여기서 products는 컨트롤러에서 모델에 추가된 이름입니다. --%>
+    <%-- 해당 카테고리에 속하는 상품들을 반복문으로 표시합니다. --%>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Photo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${products}" var="product">
+                <tr>
+                    <td>${product.productId}</td>
+                    <td>${product.productName}</td>
+                    <td>${product.description}</td>
+                    <td>${product.price}</td>
+                    <td><img src="${product.photo}" alt="${product.productName}" width="100"></td>
+                    <td><a href="/live/product?id=${product.productId}">View Details</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </body>
 </html>

@@ -67,6 +67,7 @@
   <![CDATA[	
   	select
 	  bno, title, content,writer,regdate,updatedate, replycnt
+	  
 	from(
 	    select 
 	    /*+ index_desc(tbl_board pk_board)*/
