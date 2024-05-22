@@ -2,11 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.ProductMapper">
 
+  <select id="getTotalProductCount" resultType="int">
+    SELECT COUNT(*) FROM products
+  </select>
+  
+<select id="getProductsWithPaging" resultType="org.zerock.domain.ProductVO">
+    SELECT *
+    FROM Products
+    ORDER BY ProductID
+    LIMIT #{cri.amount} OFFSET #{cri.startRow}
+</select>
+
     <!-- 제품 등록 -->
     <insert id="insertProduct" parameterType="org.zerock.domain.ProductVO">
         INSERT INTO Products (ProductName, Description, Price, Photo)
         VALUES (#{productName}, #{description}, #{price}, #{photo})
     </insert>
+    
     
     <!-- 제품 조회 -->
     <select id="selectProduct" resultType="org.zerock.domain.ProductVO" parameterType="int">
@@ -18,7 +30,7 @@
         SELECT * FROM Products
     </select>
     
-     <!-- categoryId로 해당 카테고리에 속하는 상품을 가져오는 쿼리 -->
+    <!-- categoryId로 해당 카테고리에 속하는 상품을 가져오는 쿼리 -->
     <select id="getProductsByCategory" resultType="org.zerock.domain.ProductVO" parameterType="int">
         SELECT * FROM Products WHERE CategoryID = #{categoryId}
     </select>
@@ -34,5 +46,10 @@
     <delete id="deleteProduct" parameterType="int">
         DELETE FROM Products WHERE ProductID = #{productID}
     </delete>
+    
+    <!-- 제품 이름으로 검색 -->
+    <select id="searchProductsByName" resultType="org.zerock.domain.ProductVO" parameterType="string">
+        SELECT * FROM Products WHERE ProductName LIKE CONCAT('%', #{productName}, '%')
+    </select>
     
 </mapper>

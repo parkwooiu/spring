@@ -285,6 +285,15 @@
       </dependency>
       <!-- End 시큐리티 -->
       
+      
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.11.2</version> <!-- 사용하는 Mockito 버전에 맞게 버전을 수정합니다. -->
+			<scope>test</scope>
+		</dependency>
+      
+      
    </dependencies>
     <build>
         <plugins>
