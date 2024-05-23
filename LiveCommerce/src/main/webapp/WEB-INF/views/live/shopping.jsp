@@ -66,14 +66,14 @@
         }
 
         /* 상품 목록 영역 스타일 */
-		.product-list {
-		    background-color: #fff;
-		    padding: 20px;
-		    border-radius: 10px;
-		    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-		    max-height: 300px; /* 스크롤의 최대 높이 지정 */
-		    overflow-y: auto; /* 세로 스크롤바 활성화 */
-		}
+      .product-list {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          max-height: 300px; /* 스크롤의 최대 높이 지정 */
+          overflow-y: auto; /* 세로 스크롤바 활성화 */
+      }
 
         /* 채팅 영역 스타일 */
         #chatContainer {
@@ -214,6 +214,47 @@
             var messageArea = document.getElementById("messageArea");
             messageArea.scrollTop = messageArea.scrollHeight;
         };
+        
+        
+        // 페이지 로드 시 총 가격 초기화
+        function updateTotalPrice() {
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var price = parseInt(document.getElementById("amount").value);
+            var totalAmount = quantity * price;
+            document.getElementById("totalPrice").innerText = totalAmount + "원";
+        }
+
+        // 결제하기 버튼 클릭 시
+        document.getElementById("requestPaymentBtn").addEventListener("click", function() {
+            // 수량과 가격을 가져와서 총 결제 금액 계산
+            var quantity = document.getElementById("quantity").value;
+            var price = document.getElementById("amount").value;
+            var totalAmount = quantity * price;
+            
+            // 총 결제 금액을 숨은 입력 필드에 설정
+            document.getElementById("amount").value = totalAmount;
+        });
+        
+        // 수량 변경 시 총 가격 업데이트
+        document.getElementById("quantity").addEventListener("change", function() {
+            updateTotalPrice();
+        });
+
+        // 페이지 로드 시 총 가격 초기화
+        document.addEventListener("DOMContentLoaded", function() {
+            updateTotalPrice();
+        });
+        
+      
+        // 총 가격 조회 버튼 클릭 시 총 가격 업데이트
+        function calculateTotalPrice() {
+            var quantity = parseInt(document.getElementById("quantity").value);
+            var price = parseInt(${product.price});
+            var totalAmount = quantity * price;
+            document.getElementById("totalPrice").innerText = totalAmount + "원";
+        }
+    
+        
     </script>
 </head>
 <body>
@@ -236,28 +277,52 @@
         <p>제품번호 : ${product.productId}</p>
 
         <!-- 총 가격 표시 -->
-        <p>총 가격: <span id="totalPrice">${product.price}원</span></p>
+<p>총 가격: <span id="totalPrice">${product.price}원</span></p>
 
+<!-- 수량 필드 -->
+<label for="quantity">수량:</label>
+<input type="number" id="quantity" name="quantity" min="1" value="1">
+
+<!-- 총 가격 조회 버튼 -->
+<button id="calculateTotalPriceBtn" onclick="calculateTotalPrice()">총 가격 조회</button>
+
+       
         <form method="post">
             <!-- 상품 정보를 hidden input으로 전달 -->
             <input type="hidden" name="productId" value="${product.productId}">
             <input type="hidden" name="userId" value="${currentUser}">
             <!-- 수량 필드 -->
-            <label for="quantity">수량:</label>
-            <input type="number" id="quantity" name="quantity" min="1" value="1">
+         <!-- 수량 필드 -->
+			<label for="quantity">수량:</label>
+			<input type="number" id="quantity" name="quantity" min="1" value="1">
             <!-- 장바구니에 추가 버튼 -->
             <input type="submit" formaction="/cart/add" value="장바구니 추가">
-            <!-- 주문하기 버튼 -->
-            <input type="submit" formaction="/live/order" value="주문하기">
-        </form>
+           
+         </form>
+         
+         
+<!-- 카카오페이 결제 폼 -->
+<form id="kakaoPayForm" action="/live/kakaoPay" method="post">
+    <input type="hidden" name="quantity" id="quantity" min="1" value="1">
+    <input type="hidden" name="amount" id="amount" value="${product.price * quantity}">
+    <input type="hidden" name="buyerName" value="${currentUsername}">
+    <input type="hidden" name="productName" value="${product.productName}">
+    
+    
+    
+    <!-- 기타 필요한 숨은 입력 필드를 여기에 추가하세요 -->
+    <button id="requestPaymentBtn" type="submit">결제하기</button>
+</form>
+ 
+    
     </div>
-
+    
     <!-- 우측 영역 -->
     <div class="right-container">
         <!-- 상품 목록 -->
         <h3>관련 상품 목록</h3>
        <div class="product-list">
-    <c:forEach items="${caregoryproducts}" var="relatedProduct">
+    <c:forEach items="${categoryproducts}" var="relatedProduct">
         <div class="product-item">
             <img src="${relatedProduct.photo}" alt="${relatedProduct.productName}">
             <div>

@@ -60,9 +60,9 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("currentUsername", currentUsername);
-        model.addAttribute("caregoryproducts", products);
+        model.addAttribute("categoryproducts", products);
         
-        log.info("caregoryproducts : " + products);
+        log.info("categoryproducts : " + products);
 
         // 채팅 기록을 가져와 모델에 추가
         model.addAttribute("chatHistory", liveChatService.getChatHistoryByProductID(productId));
