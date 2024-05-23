@@ -66,12 +66,14 @@
         }
 
         /* 상품 목록 영역 스타일 */
-        .product-list {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      .product-list {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          max-height: 300px; /* 스크롤의 최대 높이 지정 */
+          overflow-y: auto; /* 세로 스크롤바 활성화 */
+      }
 
         /* 채팅 영역 스타일 */
         #chatContainer {
@@ -253,12 +255,13 @@
     <!-- 우측 영역 -->
     <div class="right-container">
         <!-- 상품 목록 -->
+        <h3>관련 상품 목록</h3>
        <div class="product-list">
     <c:forEach items="${caregoryproducts}" var="relatedProduct">
         <div class="product-item">
             <img src="${relatedProduct.photo}" alt="${relatedProduct.productName}">
             <div>
-                <a href="/product?id=${relatedProduct.productId}">${relatedProduct.productName}</a>
+                <a href="/live/product?id=${relatedProduct.productId}">${relatedProduct.productName}</a>
                 <p>가격: ${relatedProduct.price}원</p>
             </div>
         </div>
