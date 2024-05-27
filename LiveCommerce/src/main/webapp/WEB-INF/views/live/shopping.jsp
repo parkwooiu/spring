@@ -229,11 +229,11 @@
         <p>가격: ${product.price}</p>
         <img src="${product.photo}" alt="${product.productName}" width="300">
 
-        <!-- 현재 로그인한 사용자 정보 출력 -->
+<%--         <!-- 현재 로그인한 사용자 정보 출력 -->
         <h3>현재 로그인한 사용자 정보</h3>
         <p>사용자 ID: ${currentUser}</p>
         <p>사용자 이름: ${currentUsername}</p>
-        <p>제품번호 : ${product.productId}</p>
+        <p>제품번호 : ${product.productId}</p> --%>
 
         <!-- 총 가격 표시 -->
         <p>총 가격: <span id="totalPrice">${product.price}원</span></p>
